@@ -23,16 +23,31 @@ $cm = get_coursemodule_from_id('quizzy', $id, 0, false, MUST_EXIST);
 $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 $quizzy = $DB->get_record('quizzy', array('id' => $cm->instance), '*', MUST_EXIST);
 
+$cmid = required_param('id', PARAM_INT);
+
+$context = context_module::instance($cmid);
 require_login($course, true, $cm);
 
-$context = context_module::instance($cm->id);
-$PAGE->set_url('/mod/quizzy/view.php', array('id' => $cm->id));
-$PAGE->set_title(format_string($quizzy->name));
-$PAGE->set_heading(format_string($course->fullname));
+if (has_capability('mod/quizzy:manage', $context)) {
+    // Redirect teachers and managers to teacher_view.php
+    echo "Redirecting to teacher_view.php";
+    redirect(new moodle_url('/mod/quizzy/teacher_view.php', ['id' => $cmid, 'courseid' => $courseid]));
+} elseif (has_capability('mod/quizzy:view', $context)) {
+    // Redirect students and guests to std_view.php
+    echo "Redirecting to std_view.php";
+    redirect(new moodle_url('/mod/quizzy/std_view.php', ['id' => $cmid, 'courseid' => $courseid]));
+} else {
+    // Redirect everyone else to view.php
+    echo "Redirecting to view.php";
+    $context = context_module::instance($cm->id);
+    $PAGE->set_url('/mod/quizzy/view.php', array('id' => $cm->id));
+    $PAGE->set_title(format_string($quizzy->name));
+    $PAGE->set_heading(format_string($course->fullname));
 
-echo $OUTPUT->header();
-echo $OUTPUT->heading(format_string($quizzy->name));
+    echo $OUTPUT->header();
+    echo $OUTPUT->heading(format_string($quizzy->name));
 
 // Add your plugin's main content here.
 
-echo $OUTPUT->footer();
+    echo $OUTPUT->footer();
+}

@@ -17,7 +17,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_quizzy';
-$plugin->version = 2023101000;
+$plugin->version = 2025031802;
 $plugin->requires = 2021051700; // Requires this Moodle version.
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->release = 'v0.1';
