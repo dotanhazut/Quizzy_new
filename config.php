@@ -160,7 +160,7 @@ $CFG->wwwroot   = 'http://localhost:8000';
 //
 // - On Windows systems you might specify something like 'c:\moodledata'
 
-$CFG->dataroot  = 'C:\finalProject\moodledata';
+$CFG->dataroot  = 'C:\Users\user\PhpstormProjects\moodledata';
 
 
 //=========================================================================

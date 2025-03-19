@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMLDB PATH="mod/quizzy/db" VERSION="2013050100" COMMENT="XMLDB file for quizzy module">
+<XMLDB PATH="mod/quizzy/db" VERSION="2025031804" COMMENT="XMLDB file for quizzy module">
     <TABLES>
         <TABLE NAME="quizzy" COMMENT="Table for quizzy instances">
             <FIELDS>
@@ -11,6 +11,21 @@
                 <FIELD NAME="timeopen" TYPE="int" LENGTH="10" NOTNULL="false"/>
                 <FIELD NAME="timeclose" TYPE="int" LENGTH="10" NOTNULL="false"/>
                 <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="quizzy_questions_std" COMMENT="Table for quizzy questions">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="question" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="ans1" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="ans2" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="ans3" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="ans4" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="correct_ans" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="status" TYPE="char" LENGTH="1" NOTNULL="true" DEFAULT="0"/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
